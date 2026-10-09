@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Math Escape Challenge</title>
+<meta name="description" content="Orientation Day · Department of Mathematics. Play the Math Escape Challenge with your team, then fill in the form.">
+<meta name="theme-color" content="#8a1c2b" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14171f" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Math Escape Challenge">
+<meta property="og:description" content="Five rounds, one phone per team. Orientation Day · Department of Mathematics.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%238a1c2b'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='40' text-anchor='middle' fill='%23fff'%3E%CF%80%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1d2433;--mute:#5d6678;--acc:#8a1c2b;--acc-ink:#fff;--acc2:#f1d9dc;--line:#ddd8cc;--shadow:0 1px 2px rgba(29,36,51,.06),0 8px 24px rgba(29,36,51,.06);--hdr:60px;--tab:64px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171f;--card:#1e222d;--ink:#eceef4;--mute:#a1a8b8;--acc:#e0707f;--acc-ink:#14171f;--acc2:#3a2227;--line:#343a49;--shadow:none}}
+:root[data-theme="dark"]{--bg:#14171f;--card:#1e222d;--ink:#eceef4;--mute:#a1a8b8;--acc:#e0707f;--acc-ink:#14171f;--acc2:#3a2227;--line:#343a49;--shadow:none}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;
+  display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+a{color:var(--acc)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px;border-radius:6px}
+.skip{position:absolute;left:8px;top:-60px;background:var(--acc);color:var(--acc-ink);padding:10px 14px;border-radius:8px;z-index:20;text-decoration:none;font-weight:600}
+.skip:focus{top:8px}
+
+/* header */
+header{flex:none;height:calc(var(--hdr) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left));
+  background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:700;margin-right:auto;min-width:0}
+.brand .logo{flex:none;width:32px;height:32px;border-radius:9px;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font-family:Georgia,serif;font-size:20px}
+.brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs{display:flex;gap:4px}
+.tabs a{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;text-decoration:none;color:var(--mute);font-weight:600;font-size:15px;transition:background .15s,color .15s}
+.tabs a:hover{background:var(--bg);color:var(--ink)}
+.tabs a[aria-current="page"]{background:var(--acc2);color:var(--acc)}
+.tabs svg{width:20px;height:20px;flex:none}
+.iconbtn{flex:none;display:flex;align-items:center;gap:6px;font:inherit;font-size:14px;font-weight:600;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.iconbtn:hover{border-color:var(--acc);color:var(--acc)}
+.iconbtn svg{width:18px;height:18px}
+
+/* views */
+main{flex:1;min-height:0;position:relative}
+.view{position:absolute;inset:0;display:none;flex-direction:column}
+.view.on{display:flex}
+#home{overflow-y:auto;-webkit-overflow-scrolling:touch}
+.wrap{width:100%;max-width:960px;margin:0 auto;padding:32px max(16px,env(safe-area-inset-left)) 40px}
+.tag{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);font-weight:700;margin-bottom:8px}
+h1{font-size:clamp(30px,6vw,46px);line-height:1.1;margin:0 0 12px;letter-spacing:-.02em}
+.lede{font-size:clamp(17px,2.4vw,19px);color:var(--mute);max-width:40em;margin:0 0 28px}
+.cta{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:28px}
+.card{display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s,border-color .15s}
+.card:hover{border-color:var(--acc);transform:translateY(-2px)}
+.card .ic{width:44px;height:44px;border-radius:12px;background:var(--acc2);color:var(--acc);display:grid;place-items:center;margin-bottom:6px}
+.card .ic svg{width:24px;height:24px}
+.card b{font-size:20px}
+.card p{margin:0;color:var(--mute)}
+.card .go{margin-top:10px;font-weight:700;color:var(--acc)}
+.card.primary{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.card.primary p,.card.primary .go{color:inherit;opacity:.9}
+.card.primary .ic{background:rgba(255,255,255,.18);color:inherit}
+h2{font-size:18px;margin:0 0 12px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.steps .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--acc2);color:var(--acc);font-weight:700;display:grid;place-items:center;font-size:14px}
+.steps span{color:var(--mute);font-size:15px}
+.steps strong{color:var(--ink);display:block}
+footer{margin-top:32px;color:var(--mute);font-size:14px}
+
+/* embedded views */
+.toolbar{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px max(16px,env(safe-area-inset-left));border-bottom:1px solid var(--line);background:var(--card);font-size:14px;color:var(--mute)}
+.toolbar a{font-weight:600;text-decoration:none;white-space:nowrap}
+.toolbar a:hover{text-decoration:underline}
+.frame{flex:1;position:relative;min-height:0}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:var(--bg)}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--mute);gap:12px;align-content:center;z-index:1;background:var(--bg)}
+.spin{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--acc);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* QR dialog */
+dialog{border:1px solid var(--line);border-radius:16px;padding:24px;background:var(--card);color:var(--ink);width:min(360px,calc(100% - 32px));text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(10,12,18,.55)}
+dialog h2{font-size:20px;margin-bottom:4px}
+dialog p{margin:0 0 16px;color:var(--mute);font-size:15px}
+.qr{background:#fff;padding:16px;border-radius:12px;display:inline-block;line-height:0}
+.qr img,.qr canvas{width:220px;height:220px}
+.url{margin:14px 0;font-size:14px;word-break:break-all;color:var(--ink)}
+.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.btn{font:inherit;font-weight:600;font-size:15px;padding:10px 16px;border-radius:10px;border:2px solid var(--acc);background:var(--acc);color:var(--acc-ink);cursor:pointer;text-decoration:none}
+.btn.alt{background:transparent;color:var(--acc)}
+.close{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:var(--mute);font-size:22px;cursor:pointer}
+
+/* phone: bottom tab bar */
+@media (max-width:640px){
+  :root{--hdr:54px}
+  .brand span{font-size:16px}
+  .iconbtn .lbl{display:none}
+  .tabs{position:fixed;left:0;right:0;bottom:0;height:calc(var(--tab) + env(safe-area-inset-bottom,0px));padding:0 0 env(safe-area-inset-bottom,0px);
+    background:var(--card);border-top:1px solid var(--line);gap:0;z-index:5}
+  .tabs a{flex:1;flex-direction:column;justify-content:center;gap:2px;font-size:12px;border-radius:0;min-height:48px}
+  .tabs a[aria-current="page"]{background:transparent}
+  .tabs a[aria-current="page"] svg{background:var(--acc2);border-radius:999px;padding:2px 14px;width:52px;height:26px}
+  .tabs a:hover{background:transparent}
+  main{margin-bottom:calc(var(--tab) + env(safe-area-inset-bottom,0px))}
+  .wrap{padding-top:22px}
+  .toolbar .hint{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation-duration:2s!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <a class="brand" href="#home" aria-label="Math Escape Challenge, home"><span class="logo" aria-hidden="true">π</span><span>Math Escape Challenge</span></a>
+  <nav class="tabs" aria-label="Main">
+    <a href="#home" data-view="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</a>
+    <a href="#challenge" data-view="challenge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>Challenge</a>
+    <a href="#form" data-view="form"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg>Form</a>
+  </nav>
+  <button class="iconbtn" id="share" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg><span class="lbl">QR code</span></button>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="view" id="home" aria-labelledby="h-home">
+    <div class="wrap">
+      <div class="tag">Orientation Day · Department of Mathematics</div>
+      <h1 id="h-home">The Math Escape Challenge</h1>
+      <p class="lede">Work as a team through five rounds of puzzles in logic, probability and patterns. Solve each one to unlock the next, then tell us what you thought.</p>
+
+      <div class="cta">
+        <a class="card primary" href="#challenge">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></span>
+          <b>Start the Challenge</b>
+          <p>Enter a team name and begin round 1.</p>
+          <span class="go" aria-hidden="true">Play now →</span>
+        </a>
+        <a class="card" href="#form">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg></span>
+          <b>Fill in the Form</b>
+          <p>A few quick questions once your team has finished.</p>
+          <span class="go" aria-hidden="true">Open form →</span>
+        </a>
+      </div>
+
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><span class="n">1</span><span><strong>One phone per team</strong>Pick one device and a team name.</span></li>
+        <li><span class="n">2</span><span><strong>Five rounds</strong>One answer per question, about 15 minutes.</span></li>
+        <li><span class="n">3</span><span><strong>Show your score</strong>Show the final screen to the organizers.</span></li>
+        <li><span class="n">4</span><span><strong>Fill in the form</strong>Tap the Form tab when you are done.</span></li>
+      </ol>
+      <footer>Department of Mathematics · Orientation Day</footer>
+    </div>
+  </section>
+
+  <section class="view" id="challenge" aria-label="The Math Escape Challenge">
+    <div class="toolbar"><span class="hint">Your progress is kept while you switch tabs.</span><a href="challenge.html" target="_blank" rel="noopener">Open in full screen ↗</a></div>
+    <div class="frame" data-src="challenge.html" data-title="The Math Escape Challenge game"></div>
+  </section>
+
+  <section class="view" id="form" aria-label="Form">
+    <div class="toolbar"><span class="hint">Trouble seeing the form?</span><a href="https://forms.gle/5pZfwe6smzsvn6Wp6" target="_blank" rel="noopener">Open in Google Forms ↗</a></div>
+    <div class="frame" data-src="https://docs.google.com/forms/d/e/1FAIpQLSc82BQhNt1Y5DH1wT2eGXiK1m-FHh_y2P1P7uKBShq66_Kx5w/viewform?embedded=true" data-title="Orientation Day form"></div>
+  </section>
+</main>
+
+<dialog id="qrDlg" aria-labelledby="qrTitle">
+  <button class="close" type="button" aria-label="Close">×</button>
+  <h2 id="qrTitle">Scan to join</h2>
+  <p>Point a phone camera at the code to open this page.</p>
+  <div class="qr" id="qrBox"></div>
+  <div class="url" id="qrUrl"></div>
+  <div class="row">
+    <button class="btn" type="button" id="copy">Copy link</button>
+    <a class="btn alt" href="qr.html" target="_blank" rel="noopener">Printable poster</a>
+  </div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script>
+(function(){
+  var views=['home','challenge','form'];
+
+  function show(id){
+    if(views.indexOf(id)<0)id='home';
+    views.forEach(function(v){document.getElementById(v).classList.toggle('on',v===id)});
+    document.querySelectorAll('.tabs a').forEach(function(a){
+      if(a.dataset.view===id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+    });
+    // load each iframe the first time its view opens, then keep it so progress survives tab switches
+    var f=document.querySelector('#'+id+' .frame');
+    if(f&&!f.firstChild){
+      f.innerHTML='<div class="loading"><div class="spin"></div>Loading…</div>';
+      var i=document.createElement('iframe');
+      i.src=f.dataset.src;i.title=f.dataset.title;i.allow='fullscreen';
+      i.onload=function(){var l=f.querySelector('.loading');if(l)l.remove()};
+      f.appendChild(i);
+    }
+    document.title=id==='home'?'Math Escape Challenge':(id==='challenge'?'Challenge':'Form')+' · Math Escape Challenge';
+  }
+  function route(){show(location.hash.slice(1)||'home')}
+  addEventListener('hashchange',route);
+  route();
+
+  // QR dialog
+  var dlg=document.getElementById('qrDlg');
+  var siteUrl=location.origin+location.pathname.replace(/index\.html$/,'');
+  document.getElementById('share').onclick=function(){
+    var box=document.getElementById('qrBox');
+    document.getElementById('qrUrl').textContent=siteUrl;
+    box.innerHTML='';
+    if(location.protocol==='file:'){box.textContent='QR code appears once the site is online.';box.style.lineHeight='1.4'}
+    else if(window.QRCode){new QRCode(box,{text:siteUrl,width:440,height:440,colorDark:'#000',colorLight:'#fff',correctLevel:QRCode.CorrectLevel.H})}
+    else box.textContent='QR code could not load. Share the link below.';
+    dlg.showModal();
+  };
+  dlg.querySelector('.close').onclick=function(){dlg.close()};
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+  document.getElementById('copy').onclick=function(){
+    var b=this;
+    (navigator.clipboard?navigator.clipboard.writeText(siteUrl):Promise.reject()).then(function(){b.textContent='Copied!'},function(){b.textContent='Copy failed'});
+    setTimeout(function(){b.textContent='Copy link'},1800);
+  };
+})();
+</script>
+</body>
+</html>

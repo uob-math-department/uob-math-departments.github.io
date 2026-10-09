@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Math Escape Poster</title>
+<meta name="description" content="Printable QR code poster for the Math Escape Challenge.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%238a1c2b'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='40' text-anchor='middle' fill='%23fff'%3E%CF%80%3C/text%3E%3C/svg%3E">
+<style>
+/* a poster is always printed black on white, so this page stays light */
+:root{--ink:#1d2433;--mute:#5d6678;--acc:#8a1c2b;--line:#ddd8cc}
+*{box-sizing:border-box}
+body{margin:0;background:#f6f4ef;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.sheet{max-width:640px;margin:24px auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:48px 32px;text-align:center}
+.tag{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);font-weight:700}
+h1{font-size:clamp(30px,7vw,48px);line-height:1.1;margin:10px 0 8px;letter-spacing:-.02em}
+.sub{font-size:20px;color:var(--mute);margin:0 0 28px}
+#qr{display:inline-block;padding:16px;background:#fff;line-height:0}
+#qr img,#qr canvas{width:min(320px,70vw);height:auto;aspect-ratio:1}
+.cta{font-size:24px;font-weight:700;margin:24px 0 6px}
+.url{font-size:17px;color:var(--mute);word-break:break-all}
+.bar{max-width:640px;margin:16px auto 0;padding:0 16px;display:flex;gap:8px;justify-content:center}
+button,a.b{font:inherit;font-weight:600;padding:10px 18px;border-radius:10px;border:2px solid var(--acc);background:var(--acc);color:#fff;cursor:pointer;text-decoration:none}
+a.b{background:transparent;color:var(--acc)}
+@media print{
+  @page{size:A4;margin:15mm}
+  body{background:#fff}
+  .bar{display:none}
+  .sheet{border:0;margin:0 auto;padding:10mm 0}
+  #qr img,#qr canvas{width:10cm}
+}
+</style>
+</head>
+<body>
+<div class="bar"><button onclick="print()">Print poster</button><a class="b" href="./">Back to site</a></div>
+<div class="sheet">
+  <div class="tag">Orientation Day · Department of Mathematics</div>
+  <h1>The Math Escape Challenge</h1>
+  <p class="sub">Five rounds · one phone per team</p>
+  <div id="qr"></div>
+  <p class="cta">Scan to start the challenge</p>
+  <p class="url" id="url"></p>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+var site=new URL('./',location.href).href;
+document.getElementById('url').textContent=site.replace(/^https?:\/\//,'').replace(/\/$/,'');
+var box=document.getElementById('qr');
+if(location.protocol==='file:')box.textContent='The QR code appears once the site is online.';
+else if(window.QRCode)new QRCode(box,{text:site,width:600,height:600,colorDark:'#000',colorLight:'#fff',correctLevel:QRCode.CorrectLevel.H});
+else box.textContent='QR code could not load. Use the link below.';
+</script>
+</body>
+</html>
